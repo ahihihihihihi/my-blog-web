@@ -23,3 +23,22 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Next.js build output
+.next/
+out/
+
+# Contentlayer
+.contentlayer
+
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+
+# Env files
+.env*.local
+
+# Husky (nếu bạn muốn ignore luôn)
+.husky/_
