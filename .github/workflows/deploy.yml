@@ -5,16 +5,12 @@ on:
     branches: ["main"]
   schedule:
     - cron: '0 */3 * * *' # Tự động húp bài mỗi 3 tiếng
-  workflow_dispatch:      # Nút bấm thủ công cho bạn hiền
+  workflow_dispatch:      # Nút bấm thủ công
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-# ÉP HỆ THỐNG DÙNG NODE 24 ĐỂ KHÔNG BÁO LỖI NỮA
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -26,7 +22,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "24" # CHIỀU THEO Ý GITHUB: DÙNG NODE 24
+          node-version: "20" # Dùng bản 20 chuẩn của Runner hiện tại
           cache: 'npm'
           
       - name: Install dependencies
@@ -35,7 +31,7 @@ jobs:
       - name: Build with Next.js
         run: npm run build
         env:
-          VITE_BLOGGER_ID: ${{ secrets.VITE_BLOGGER_ID }}
+          VITE_BLOGGER_ID: ${{ secrets.VITE_BLOGGER_ID }} # Cần đảm bảo Secret này đã được add
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
