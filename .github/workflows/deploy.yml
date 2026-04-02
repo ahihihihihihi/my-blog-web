@@ -4,13 +4,17 @@ on:
   push:
     branches: ["main"]
   schedule:
-    - cron: '0 */3 * * *' # Tự động chạy mỗi 3 tiếng
-  workflow_dispatch:      # Nút bấm thủ công
+    - cron: '0 */3 * * *' # Tự động húp bài mỗi 3 tiếng
+  workflow_dispatch:      # Nút bấm thủ công cho bạn hiền
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+# ÉP HỆ THỐNG DÙNG NODE 24 ĐỂ KHÔNG BÁO LỖI NỮA
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -22,11 +26,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18" # Đổi sang 18 để ổn định tuyệt đối
+          node-version: "24" # CHIỀU THEO Ý GITHUB: DÙNG NODE 24
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm install --legacy-peer-deps # Thêm cờ này để tránh lỗi xung đột thư viện
+        run: npm install --legacy-peer-deps
         
       - name: Build with Next.js
         run: npm run build
