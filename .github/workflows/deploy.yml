@@ -2,10 +2,10 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Tự động build khi bạn git push
+    branches: ["main"]
   schedule:
-    - cron: '0 */3 * * *' # Tự động húp bài mỗi 3 tiếng (0h, 3h, 6h...)
-  workflow_dispatch:      # Kích hoạt nút bấm Build thủ công
+    - cron: '0 */3 * * *' # Tự động chạy mỗi 3 tiếng
+  workflow_dispatch:      # Nút bấm thủ công
 
 permissions:
   contents: read
@@ -22,21 +22,21 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: 'npm' # Giúp build nhanh hơn, tiết kiệm tài nguyên
+          node-version: "18" # Đổi sang 18 để ổn định tuyệt đối
+          cache: 'npm'
           
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps # Thêm cờ này để tránh lỗi xung đột thư viện
         
       - name: Build with Next.js
         run: npm run build
         env:
-          VITE_BLOGGER_ID: ${{ secrets.VITE_BLOGGER_ID }} # Lấy ID từ kho mật
+          VITE_BLOGGER_ID: ${{ secrets.VITE_BLOGGER_ID }}
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out # Thư mục chứa file tĩnh sau khi build
+          path: ./out
 
   deploy:
     environment:
