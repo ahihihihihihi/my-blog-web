@@ -69,23 +69,9 @@ module.exports = () => {
     reactStrictMode: true,
     trailingSlash: false,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    eslint: {
-      ignoreDuringBuilds: true
-    },
-    typescript: {
-    ignoreBuildErrors: true
-    },
-    images: {
-      unoptimized: true
-    },
-    async headers() {
-      return [
-        {
-          source: '/(.*)',
-          headers: securityHeaders,
-        },
-      ]
-    },
+    eslint: { ignoreDuringBuilds: true },
+    typescript: { ignoreBuildErrors: true },
+    images: { unoptimized: true },
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.svg$/,
