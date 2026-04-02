@@ -55,11 +55,22 @@ export async function getBloggerData() {
 
     return {
       title: entry.title.$t,
+      updated: entry.updated.$t,
       imgSrc: content.match(/<img.*?src=["'](.*?)["']/)?.[1]?.replace(/&amp;/g, '&') || '/static/images/default.jpg',
       description: content.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
       content: content,
       postSlug: postSlug,
       allLabels: labels, 
     };
+  });
+}
+
+// lib/blogger.ts bổ sung thêm hàm này
+export async function getCategoryCounts() {
+  const [posts, config] = await Promise.all([getBloggerData(), getCategoryConfig()]);
+  
+  return config.map(cat => {
+    const count = posts.filter(p => p.allLabels.includes(cat.slug)).length;
+    return { ...cat, count };
   });
 }

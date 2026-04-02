@@ -33,6 +33,7 @@ export default function PostList({ posts, label, categoryConfig }: PostListProps
               href={`/${primaryLabel}/${post.postSlug}`}
               allLabels={post.allLabels}
               categoryConfig={categoryConfig}
+              updated={post.updated}
             />
           )
         })}

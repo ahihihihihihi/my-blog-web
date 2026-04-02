@@ -1,30 +1,33 @@
 import Image from './Image'
 import Link from './Link'
 
-const Card = ({ title, description, imgSrc, href, allLabels, categoryConfig }) => {
-  // Logic lọc: Tìm nhãn đầu tiên của bài viết có tồn tại trong từ điển config
-  const displayLabel = allLabels?.find((lSlug) => 
+const Card = ({ title, description, imgSrc, href, allLabels, categoryConfig, updated }) => {
+  // 1. Logic lọc nhãn: Tìm nhãn đầu tiên của bài viết có trong từ điển config
+  const displayLabelSlug = allLabels?.find((lSlug) => 
     categoryConfig?.some((config) => config.slug === lSlug)
   );
   
-  // Lấy tên hiển thị tương ứng từ config
-  const labelName = categoryConfig?.find((c) => c.slug === displayLabel)?.name;
+  // 2. Lấy tên hiển thị tương ứng (ví dụ: "Du Lịch")
+  const labelName = categoryConfig?.find((c) => c.slug === displayLabelSlug)?.name;
+
+  // 3. Định dạng ngày tháng (VD: 30/3/2026)
+  const formattedDate = updated ? new Date(updated).toLocaleDateString('vi-VN') : null;
 
   return (
     <div className="md max-w-[544px] p-4 md:w-1/2">
       <div
         className={`${
           imgSrc && 'h-full'
-        } overflow-hidden rounded-md border-2 border-gray-200/60 dark:border-gray-700/60`}
+        } overflow-hidden rounded-xl border-2 border-gray-200/60 bg-white dark:border-gray-700/60 dark:bg-gray-800/30 transition-all hover:shadow-lg`}
       >
         {imgSrc && (
-          <div className="relative"> {/* Thêm relative để làm gốc cho nhãn absolute */}
+          <div className="relative aspect-video overflow-hidden">
             {href ? (
-              <Link href={href} aria-label={`Link to ${title}`}>
+              <Link href={href} aria-label={`Link to ${title}`} className="block h-full w-full">
                 <Image
                   alt={title}
                   src={imgSrc}
-                  className="object-cover object-center md:h-36 lg:h-48"
+                  className="object-cover object-center transition-transform duration-500 hover:scale-105"
                   width={544}
                   height={306}
                 />
@@ -33,16 +36,16 @@ const Card = ({ title, description, imgSrc, href, allLabels, categoryConfig }) =
               <Image
                 alt={title}
                 src={imgSrc}
-                className="object-cover object-center md:h-36 lg:h-48"
+                className="object-cover object-center"
                 width={544}
                 height={306}
               />
             )}
 
-            {/* Hiển thị Nhãn Absolute */}
+            {/* NHÃN ABSOLUTE TRÊN ẢNH */}
             {labelName && (
-              <div className="absolute top-2 left-2 z-10">
-                <span className="rounded bg-primary-500 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">
+              <div className="absolute top-3 left-3 z-10">
+                <span className="rounded bg-primary-500/90 backdrop-blur-sm px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">
                   {labelName}
                 </span>
               </div>
@@ -51,20 +54,33 @@ const Card = ({ title, description, imgSrc, href, allLabels, categoryConfig }) =
         )}
 
         <div className="p-6">
-          <h2 className="mb-3 text-2xl leading-8 font-bold tracking-tight">
+          {/* HIỂN THỊ NGÀY THÁNG */}
+          {formattedDate && (
+            <div className="mb-2 flex items-center text-xs font-medium text-gray-500 dark:text-gray-400">
+              <time dateTime={updated}>📅 {formattedDate}</time>
+            </div>
+          )}
+
+          {/* TIÊU ĐỀ - THÊM break-words ĐỂ CHỐNG TRÀN */}
+          <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight break-words">
             {href ? (
-              <Link href={href} aria-label={`Link to ${title}`}>
+              <Link href={href} aria-label={`Link to ${title}`} className="text-gray-900 dark:text-gray-100 hover:text-primary-500 transition-colors">
                 {title}
               </Link>
             ) : (
               title
             )}
           </h2>
-          <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
+
+          {/* MÔ TẢ - THÊM break-words VÀ line-clamp */}
+          <p className="prose mb-4 max-w-none text-sm text-gray-500 dark:text-gray-400 line-clamp-2 break-words">
+            {description}
+          </p>
+
           {href && (
             <Link
               href={href}
-              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-base leading-6 font-medium"
+              className="text-sm font-bold uppercase tracking-widest text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               aria-label={`Link to ${title}`}
             >
               Đọc tiếp &rarr;
