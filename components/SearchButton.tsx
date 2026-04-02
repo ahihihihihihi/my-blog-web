@@ -1,24 +1,21 @@
-import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
-import { KBarButton } from 'pliny/search/KBarButton'
-import siteMetadata from '@/data/siteMetadata'
-
+// components/SearchButton.tsx
 const SearchButton = () => {
-  if (
-    siteMetadata.search &&
-    (siteMetadata.search.provider === 'algolia' || siteMetadata.search.provider === 'kbar')
-  ) {
-    const SearchButtonWrapper =
-      siteMetadata.search.provider === 'algolia' ? AlgoliaButton : KBarButton
-
-    return (
-      <SearchButtonWrapper aria-label="Search">
+  return (
+    <form action="/search" method="GET" className="relative flex items-center">
+      <input
+        type="text"
+        name="q" // Cực kỳ quan trọng: name="q" sẽ tạo ra ?q= trên URL
+        placeholder="Tìm bài viết..."
+        className="w-32 sm:w-48 rounded-full border border-gray-300 bg-gray-50 px-4 py-1 text-sm focus:border-primary-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 md:w-64"
+      />
+      <button type="submit" className="absolute right-3 text-gray-500 hover:text-primary-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          strokeWidth={2}
           stroke="currentColor"
-          className="hover:text-primary-500 dark:hover:text-primary-400 h-6 w-6 text-gray-900 dark:text-gray-100"
+          className="h-4 w-4"
         >
           <path
             strokeLinecap="round"
@@ -26,9 +23,9 @@ const SearchButton = () => {
             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
           />
         </svg>
-      </SearchButtonWrapper>
-    )
-  }
+      </button>
+    </form>
+  )
 }
 
 export default SearchButton
