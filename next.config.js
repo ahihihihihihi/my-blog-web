@@ -64,7 +64,7 @@ const unoptimized = process.env.UNOPTIMIZED ? true : undefined
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
-    output: 'export', // Bắt buộc để xuất file tĩnh
+    output: 'export',
     basePath,
     reactStrictMode: true,
     trailingSlash: false,
@@ -76,7 +76,7 @@ module.exports = () => {
     ignoreBuildErrors: true
     },
     images: {
-      unoptimized: true, // GitHub Pages không hỗ trợ tối ưu ảnh tự động
+      unoptimized: true
     },
     async headers() {
       return [
