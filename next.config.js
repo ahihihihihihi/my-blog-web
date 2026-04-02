@@ -76,12 +76,6 @@ module.exports = () => {
     ignoreBuildErrors: true,
     },
     images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: '**',
-        },
-      ],
       unoptimized: true, // GitHub Pages không hỗ trợ tối ưu ảnh tự động
     },
     async headers() {
