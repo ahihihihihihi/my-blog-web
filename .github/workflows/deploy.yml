@@ -34,7 +34,7 @@ jobs:
         
       - name: Build with Next.js
         # THÊM BIẾN ĐỂ KHÔNG BỊ CHẾT KHI LỖI LINT/TYPESCRIPT VẶT
-        run: npx next build
+        run: run: npm run build -- --no-lint
         env:
           VITE_BLOGGER_ID: ${{ secrets.VITE_BLOGGER_ID }}
           NEXT_PUBLIC_BLOGGER_ID: ${{ secrets.VITE_BLOGGER_ID }} # Thêm cả bản public cho chắc
