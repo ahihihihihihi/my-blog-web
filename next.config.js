@@ -7,10 +7,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
-    output: 'export', // Bắt buộc cho GitHub Pages
+    output: 'export',
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    // BỎ QUA LỖI ĐỂ BUILD THÀNH CÔNG
+    // ÉP NEXT.JS LỜ ĐI TẤT CẢ LỖI TRONG FILE ERROR.TXT BẠN GỬI
     eslint: {
       ignoreDuringBuilds: true, 
     },
@@ -20,6 +20,5 @@ module.exports = () => {
     images: {
       unoptimized: true,
     },
-    // Tuyệt đối KHÔNG thêm async headers() vào đây
   })
 }
