@@ -70,10 +70,10 @@ module.exports = () => {
     trailingSlash: false,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     eslint: {
-      ignoreDuringBuilds: true,
+      ignoreDuringBuilds: true
     },
     typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
     },
     images: {
       unoptimized: true, // GitHub Pages không hỗ trợ tối ưu ảnh tự động
