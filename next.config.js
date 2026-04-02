@@ -10,15 +10,15 @@ module.exports = () => {
     output: 'export',
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    // ÉP NEXT.JS LỜ ĐI TẤT CẢ LỖI TRONG FILE ERROR.TXT BẠN GỬI
     eslint: {
-      ignoreDuringBuilds: true, 
+      ignoreDuringBuilds: true, // Lờ đi lỗi Prettier/ESLint
     },
     typescript: {
-      ignoreBuildErrors: true,
+      ignoreBuildErrors: true, // Lờ đi lỗi Type
     },
     images: {
       unoptimized: true,
     },
+    // TUYỆT ĐỐI KHÔNG CÓ async headers() Ở ĐÂY
   })
 }
