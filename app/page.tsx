@@ -8,29 +8,29 @@ import PostCard from '@/components/PostCard'
 
 export default async function HomePage() {
   // Húp dữ liệu song song từ "người khổng lồ"
-  const [allPosts, sidebarCategories,config] = await Promise.all([
+  const [allPosts, sidebarCategories, config] = await Promise.all([
     getBloggerData(),
     getSidebarData(),
-    getCategoryConfig()
-  ]);
+    getCategoryConfig(),
+  ])
 
-  const displayPosts = allPosts.slice(0, 6);
+  const displayPosts = allPosts.slice(0, 6)
 
   return (
     <SectionContainer>
-      <div className="flex flex-col md:flex-row gap-10 py-10">
+      <div className="flex flex-col gap-10 py-10 md:flex-row">
         {/* SIDEBAR DÙNG CHUNG */}
         <Sidebar categories={sidebarCategories} />
 
-        <main className="flex-1 min-w-0">
-          <h1 className="text-2xl font-extrabold mb-8 uppercase tracking-tight text-gray-900 dark:text-gray-100">
+        <main className="min-w-0 flex-1">
+          <h1 className="mb-8 text-2xl font-extrabold tracking-tight text-gray-900 uppercase dark:text-gray-100">
             Mới cập nhật
           </h1>
           <div className="space-y-12">
             {allPosts.slice(0, 6).map((post) => (
               <PostCard key={post.postSlug} post={post} config={config} />
             ))}
-          </div>          
+          </div>
         </main>
       </div>
     </SectionContainer>

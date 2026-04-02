@@ -11,7 +11,7 @@ interface PostListProps {
 
 export default function PostList({ posts, label, categoryConfig }: PostListProps) {
   const [displayCount, setDisplayCount] = useState(6)
-  
+
   const displayPosts = posts.slice(0, displayCount)
   const hasMore = displayCount < posts.length
 
@@ -20,9 +20,9 @@ export default function PostList({ posts, label, categoryConfig }: PostListProps
       <div className="-m-4 flex flex-wrap">
         {displayPosts.map((post) => {
           // Tìm nhãn đầu tiên hợp lệ để làm link
-          const primaryLabel = post.allLabels.find((l: string) => 
-            categoryConfig?.some((c: any) => c.slug === l)
-          ) || label;
+          const primaryLabel =
+            post.allLabels.find((l: string) => categoryConfig?.some((c: any) => c.slug === l)) ||
+            label
 
           return (
             <Card
@@ -38,12 +38,12 @@ export default function PostList({ posts, label, categoryConfig }: PostListProps
           )
         })}
       </div>
-      
+
       {hasMore && (
-        <div className="flex justify-center mt-12">
+        <div className="mt-12 flex justify-center">
           <button
             onClick={() => setDisplayCount(displayCount + 6)}
-            className="rounded-md bg-primary-500 px-6 py-2 text-white font-bold hover:bg-primary-600 transition"
+            className="bg-primary-500 hover:bg-primary-600 rounded-md px-6 py-2 font-bold text-white transition"
           >
             Xem thêm bài viết
           </button>

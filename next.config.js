@@ -8,14 +8,14 @@ module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
     output: 'export', // Bắt buộc cho GitHub Pages
-    basePath: '',     // Để trống vì bạn dùng Custom Domain git.update.io.vn
-    trailingSlash: true, 
+    basePath: '', // Để trống vì bạn dùng Custom Domain git.update.io.vn
+    trailingSlash: true,
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    
+
     // ĐOẠN NÀY ĐỂ VƯỢT QUA LỖI ĐỎ Ở LOG
     eslint: {
-      ignoreDuringBuilds: true, 
+      ignoreDuringBuilds: true,
     },
     typescript: {
       ignoreBuildErrors: true,

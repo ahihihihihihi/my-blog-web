@@ -6,9 +6,9 @@ const SearchButton = () => {
         type="text"
         name="q" // Cực kỳ quan trọng: name="q" sẽ tạo ra ?q= trên URL
         placeholder="Tìm bài viết..."
-        className="w-32 sm:w-48 rounded-full border border-gray-300 bg-gray-50 px-4 py-1 text-sm focus:border-primary-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 md:w-64"
+        className="focus:border-primary-500 w-32 rounded-full border border-gray-300 bg-gray-50 px-4 py-1 text-sm focus:outline-none sm:w-48 md:w-64 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
       />
-      <button type="submit" className="absolute right-3 text-gray-500 hover:text-primary-500">
+      <button type="submit" className="hover:text-primary-500 absolute right-3 text-gray-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
