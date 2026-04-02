@@ -1,30 +1,36 @@
 // app/search/page.tsx
-import { searchBloggerPosts, getSidebarData } from 'lib/blogger'
+import { searchBloggerPosts, getSidebarData, getCategoryConfig } from 'lib/blogger'
 import SearchContent from '@/components/SearchContent'
 import Sidebar from '@/components/Sidebar'
 import SectionContainer from '@/components/SectionContainer'
 
-export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  const { q } = await searchParams;
-  const query = q || '';
+export default async function SearchPage({ 
+  searchParams 
+}: { 
+  searchParams: Promise<{ q?: string }> 
+}) {
+  const { q } = await searchParams
+  const query = q || ''
 
-  // Húp song song: Kết quả search sâu từ GG và Dữ liệu đếm bài cho Sidebar
-  const [searchResults, sidebarCategories] = await Promise.all([
+  // Húp đồng thời 3 thứ: Kết quả search, Dữ liệu Sidebar, và Từ điển Label
+  const [searchResults, sidebarCategories, config] = await Promise.all([
     query ? searchBloggerPosts(query) : [],
-    getSidebarData() 
-  ]);
+    getSidebarData(),
+    getCategoryConfig()
+  ])
 
   return (
     <SectionContainer>
       <div className="flex flex-col md:flex-row gap-10 py-10">
-        {/* Sidebar chuẩn chỉnh có số lượng bài */}
+        {/* SIDEBAR DÙNG CHUNG - Luôn hiện số lượng chuẩn bài */}
         <Sidebar categories={sidebarCategories} />
 
-        {/* Nội dung chính của trang Search */}
         <main className="flex-1 min-w-0">
+          {/* Truyền thêm config xuống để SearchContent biết đường mà hiện Tiếng Việt trên Label absolute */}
           <SearchContent 
             initialPosts={searchResults} 
             query={query} 
+            config={config} 
           />
         </main>
       </div>

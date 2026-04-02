@@ -18,7 +18,7 @@ export default function Sidebar({ categories }) {
               <span className="group-hover:translate-x-1 transition-transform">
                 {cat.name}
               </span>
-              <span className="bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded text-[10px] text-gray-500 font-bold">
+              <span className="bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded text-[10px] text-gray-500 font-bold shadow-inner">
                 {cat.count || 0}
               </span>
             </Link>

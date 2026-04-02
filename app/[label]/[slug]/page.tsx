@@ -84,7 +84,7 @@ export default async function PostDetail({ params }: { params: Promise<{ label: 
 
       {/* NỘI DUNG BÀI VIẾT */}
       <div 
-        className="prose max-w-none dark:prose-invert" 
+        className="prose dark:prose-invert max-w-none"
         dangerouslySetInnerHTML={{ __html: post.content }} 
       />
       
