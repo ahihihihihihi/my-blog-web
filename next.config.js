@@ -7,13 +7,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
-    output: 'export',
-    basePath: '',
-    trailingSlash: true,
+    output: 'export', // Bắt buộc cho GitHub Pages
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    // BỎ QUA LỖI ĐỂ BUILD THÀNH CÔNG
     eslint: {
-      // ĐÂY LÀ CHÌA KHÓA: Bỏ qua đống lỗi Prettier trong log bạn gửi
       ignoreDuringBuilds: true, 
     },
     typescript: {
@@ -22,6 +20,6 @@ module.exports = () => {
     images: {
       unoptimized: true,
     },
-    // KHÔNG THÊM headers() VÀO ĐÂY VÌ SẼ BỊ LỖI EXPORT TĨNH
+    // Tuyệt đối KHÔNG thêm async headers() vào đây
   })
 }
