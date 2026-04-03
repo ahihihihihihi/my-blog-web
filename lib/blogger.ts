@@ -1,6 +1,6 @@
 // lib/blogger.ts
 
-const blogId = process.env.VITE_BLOGGER_ID;
+const blogId = process.env.NEXT_BLOGGER_ID;
 
 function convertToSlug(text: string) {
   if (!text) return '';
